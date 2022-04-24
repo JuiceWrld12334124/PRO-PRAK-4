@@ -19,7 +19,7 @@
     }
 
 
-    $statement = $pdo->prepare('SELECT id, email, passw FROM users WHERE email = :email');
+    $statement = $pdo->prepare('SELECT id, email, role ,passw FROM users WHERE email = :email');
     $statement->bindParam(':email', $_POST['email']);
 
     if (!$statement->execute()) {
@@ -28,15 +28,33 @@
 
     $data = $statement->fetch(PDO::FETCH_ASSOC);
 
-
-    if (isset($data['passw'])) {
-        if (password_verify($_POST['passw'], $data['passw'])) {
-            $_SESSION['userid'] = $data['id'];
-            echo json_encode('Logginin '.$_SESSION['userid']);
+    if ($data['role'] == "admin")
+    {
+        if (isset($data['passw'])) {
+            if (password_verify($_POST['passw'], $data['passw'])) {
+                $_SESSION['userid'] = $data['id'];
+                $_SESSION['role'] = 'admin';
+                echo json_encode('Logginin '.$_SESSION['userid']);
+                die;
+            }
+            echo json_encode(['error'=>true, 'errorInfo'=>'Wachtwoord niet gevonden']);
             die;
+        } else {
+            echo json_encode(['error' => true, 'errorInfo'=>'Gebruiker niet gevonden']);
         }
-        echo json_encode(['error'=>true, 'errorInfo'=>'Wachtwoord niet gevonden']);
-        die;
-    } else {
-        echo json_encode(['error' => true, 'errorInfo'=>'Gebruiker niet gevonden']);
+
     }
+    else {
+        if (isset($data['passw'])) {
+            if (password_verify($_POST['passw'], $data['passw'])) {
+                $_SESSION['userid'] = $data['id'];
+                echo json_encode('Logginin '.$_SESSION['userid']);
+                die;
+            }
+            echo json_encode(['error'=>true, 'errorInfo'=>'Wachtwoord niet gevonden']);
+            die;
+        } else {
+            echo json_encode(['error' => true, 'errorInfo'=>'Gebruiker niet gevonden']);
+        }
+    }
+
