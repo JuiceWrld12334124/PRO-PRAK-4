@@ -758,6 +758,15 @@ display:inline-block;
     color:rgb(9, 255, 0);
   }
 
+  .green 
+  {
+    color:rgb(9, 255, 0);
+  }
+  .red 
+  {
+    color: red;
+  }
+
   .flex-card-card
   {
     display: flex;
