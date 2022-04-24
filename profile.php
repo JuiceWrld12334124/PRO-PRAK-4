@@ -16,6 +16,9 @@
         die;
     }
     $getsum = SelectFromBD($pdo, 'SELECT SUM(vote) as sum FROM postVotes WHERE userID=?', [$target], false);
+    if ($getsum['sum'] >= 1){$rep = "green";}
+    elseif ($getsum['sum'] == 0){$rep = "bold";}
+    else {$rep = "red";}
 ?>
 
 <img class="banner-img mt-3" src="<?php echo $data['banner_url']; ?>">
@@ -35,7 +38,7 @@
 } ?></p>
         <small class="review-date"><?php echo $data['email']; ?></small>
         <small class="review-date"><br>Member since: <?php echo $data['regDate']; ?></small>
-        <small class="review-date bold"><br>Reputation: <?php echo $getsum['sum']; ?></small>
+        <small class="review-date <?php echo $rep ?>"><br>Reputation: <?php echo $getsum['sum']; ?></small>
         </div>
     </div>
     </div>
