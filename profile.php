@@ -9,13 +9,20 @@
     } else {
         $target = $_SESSION['userid'];
     }
-
-    $data = SelectFromBD($pdo, 'SELECT id, nickname, email, bio, avatar_url, banner_url, regDate from users WHERE id=?', [$target], false);
+    // TO DO:
+    // Select role from DB
+    // If the user is an admin display STAFF text
+    $data = SelectFromBD($pdo, 'SELECT id, nickname, email, bio, avatar_url, banner_url, role ,regDate from users WHERE id=?', [$target], false);
     if ($data === false) {
         echo 'No user found with that idea.';
         die;
     }
+    if ($data['role'] == 'admin') 
+    {$role = 'STAFF'; $prefix = '[ADMIN]';$red = 'red';} 
+    else { $role = 'USER';$prefix = '';}
+
     $getsum = SelectFromBD($pdo, 'SELECT SUM(vote) as sum FROM postVotes WHERE userID=?', [$target], false);
+
     if ($getsum['sum'] >= 1){$rep = "green";}
     elseif ($getsum['sum'] == 0){$rep = "bold";}
     else {$rep = "red";}
@@ -28,7 +35,7 @@
     <div class="row blockquote">
         <div class="container grid grid-username">
         <img class="profile-img" src="<?php echo $data['avatar_url']; ?>">
-        <h4><?php echo $data['nickname'] ?></h4>
+        <h4 class="<?=$red?>"><?= $prefix,$data['nickname'] ?></h4>
         </div>
         <div>
         <p class="review-text"><?php if (strlen($data['bio']) == 0) {
@@ -39,6 +46,7 @@
         <small class="review-date"><?php echo $data['email']; ?></small>
         <small class="review-date"><br>Member since: <?php echo $data['regDate']; ?></small>
         <small class="review-date <?php echo $rep ?>"><br>Reputation: <?php echo $getsum['sum']; ?></small>
+        
         </div>
     </div>
     </div>
@@ -84,13 +92,13 @@
 ?>
 
 </div>
-<div class="container">
+<div class="container grid grid-1">
     <h3>Accounts posts</h3>
     <?php
         $posts = SelectFromBD($pdo, 'SELECT * FROM posts WHERE authorID=? ORDER BY postID DESC', [$target], true);
         foreach ($posts as $post):
     ?>
-    <div class="card mt-4 post" data-postid="<?php echo $post['postID']; ?>">
+    <div class="card container grid post" data-postid="<?php echo $post['postID']; ?>">
         <a href="<?php echo $post['image_url']; ?>" target="_blank" class="card-header postTitle" onclick="if(this.getAttribute('href') == '') return false;"><?php echo $post['title']; ?></a>
         <input type="text" class="editTitle d-none">
         <div class="card-body row">
