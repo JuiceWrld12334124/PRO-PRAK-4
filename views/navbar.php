@@ -1,3 +1,12 @@
+<?php
+error_reporting(0);
+    if (isset($_GET['targetUser'])) {
+        $target = $_GET['targetUser'];
+    } else {
+        $target = $_SESSION['userid'];
+    }
+$data = SelectFromBD($pdo, 'SELECT id, nickname, email, bio, avatar_url, banner_url, role ,regDate from users WHERE id=?', [$target], false);
+?>
 
 
 <div class="navbar">
@@ -30,8 +39,10 @@
                         </a>
                     </li>
                     <li >
-                        <a href="app/auth/logout.php">Log out</a>
-
+                        <a href="app/auth/logout.php">Logout</a>
+                    </li>
+                    <li>
+                     <?php if($data['role'] == "admin") { echo "<a href='./admin.php'>Admin</a>  ";  } ?>
                     </li>
                 </ul>
                 <?php endif; ?>
