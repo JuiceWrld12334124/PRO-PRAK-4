@@ -42,7 +42,7 @@ $data = SelectFromBD($pdo, 'SELECT id, nickname, email, bio, avatar_url, banner_
                         <a href="app/auth/logout.php">Logout</a>
                     </li>
                     <li>
-                     <?php if($data['role'] == "admin") { echo "<a href='./admin.php'>Admin</a>  ";  } ?>
+                     <?php if($data['role'] == "admin") { echo "<a href='admin.php'>Admin</a>  ";  } ?>
                     </li>
                 </ul>
                 <?php endif; ?>
