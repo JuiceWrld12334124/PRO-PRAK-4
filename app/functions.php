@@ -20,3 +20,4 @@ function SelectFromBD(PDO $pdo, string $sql, array $params, bool $fetchAll)
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
+
