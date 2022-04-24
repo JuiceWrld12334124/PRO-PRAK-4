@@ -17,11 +17,7 @@
     padding: 0;
     margin: 0;
     }
-  #cheese
-  {
-    height: 1600px !important;
-  }
-    
+
     body {
       font-family: 'Cairo', sans-serif;
     color: #333;
@@ -53,9 +49,6 @@
 
     }
 
-    .resolved {
-      background-color: rgba(34, 185, 34, 0.336);
-    }
     
     .features-head img,
     .overons-head img {
@@ -95,19 +88,6 @@
       z-index: 500;
     }
     
-    .disppear{
-      animation: vanish 1s forwards;
-    }
-    @keyframes vanish {
-      100%{
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-    .loader > img
-    {
-      width: 25%;
-    }
     .navbar a {
 
     color: black;
@@ -362,7 +342,6 @@
     }
     
     textarea {
-    width: 50%;
     height: 150px;
     padding: 14px 20px;
     box-sizing: border-box;
@@ -370,6 +349,13 @@
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;
+    }
+
+    @media screen and (max-width: 500px) {
+      textarea{
+        width: 100%;
+      }
+      
     }
     
     input[type=text], select {
@@ -766,6 +752,11 @@ display:inline-block;
   {
     color: red;
   }
+  .b-red 
+  {
+    color: rgb(255, 0, 0);
+    width: 10%;
+  }
 
   .flex-card-card
   {
@@ -1145,7 +1136,7 @@ height: 100%;
 
 .bg-primary,
 .btn-primary {
-    background-color: #417886;
+    background-color: orange;
     color: #fff;
 }
 
@@ -1407,14 +1398,53 @@ height: 100%;
     width: 50%;
 }
 
+
+body{
+   margin: 0;
+}
+
+.sidebar{
+   position: fixed;
+   top:0;
+   left: 0;
+   bottom: 0;
+   background: rgb(255, 255, 255);
+   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+   padding-top: 50px;
+}
+
+.sidebar h1{
+   display: block;
+   padding: 10px 20px;
+   color: rgb(0, 0, 0);
+   text-decoration: none;
+   font-family: "Rubik";
+   letter-spacing: 2px;
+   font-weight: 400;
+   margin: 0;
+   font-size: 25px;
+   text-transform: uppercase;
+}
+
+.sidebar a{
+   display: block;
+   padding: 10px 20px;
+   color: rgb(0, 0, 0);
+   text-decoration: none;
+   font-family: "Rubik";
+   letter-spacing: 2px;
+}
+
+.sidebar a:hover{
+   color: orange;
+   font-weight: bold;
+}
+
     
 @media (max-width:890px) {
 
 
-    img
-    {
-      display: none;
-    }
+
 
     section.overons-head.bg-primary.py-5
     {
