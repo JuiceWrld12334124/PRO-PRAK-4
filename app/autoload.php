@@ -15,4 +15,5 @@ $pdo = new PDO($config['database_path']);
 
 $pdo->query('PRAGMA foreign_keys=ON');
 
+
 require __DIR__.'/functions.php';

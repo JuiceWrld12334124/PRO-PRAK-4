@@ -44,7 +44,6 @@ window.onload = () => {
     });
 
     document.querySelector('.btn-loginUser').addEventListener('click', event => {
-        event.preventDefault();
         let formData = new FormData();
         formData.append('email', loginUserForm['email'].value);
         formData.append('passw', loginUserForm['passw'].value);
