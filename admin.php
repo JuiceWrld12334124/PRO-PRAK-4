@@ -8,31 +8,33 @@ require 'app/autoload.php' ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/styles/style.css">
-
     <title>Document</title>
 </head>
 <body>
     <div class="sidebar">
         <h1>Admin</h1>
-        <a href="">Users</a>
-        <a href="">Posts</a>
+        <a href="admin.php">Users</a>
+        <a href="a-posts.php">Posts</a>
+        <a href="index.php"><===</a>
      </div>
-
 
      <div class="container grid grid-2">
      <?php
-     $statement = $pdo->prepare('SELECT * FROM users');
-     $statement->execute();
+        $users = SelectFromBD($pdo, 'SELECT * FROM users', [], true);
 
-     foreach ($statement as $user): 
-        $username = $user['nickname'];
-        $userid = $user['id'];
-        ?>
-        <?php endforeach; ?>
-     </div>
-
+        foreach ($users as $user):
+    ?>
+    <div class="card container grid grid-1 post">
+        <a><?=$user['nickname']?></a>
     </div>
-    
+    <?php echo "<form class='container grid' action='app/users/delete.php' method='POST'>
+    <button class='button-solved ' name='id' value='".$user['id']."'>Delete User</button>
+    </form> ";?>
+    <?php
+        endforeach;
+    ?>
+     </div>
+    </div>
 </body>
 </html>
 
