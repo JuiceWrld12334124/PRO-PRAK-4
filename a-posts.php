@@ -15,6 +15,7 @@ require 'app/autoload.php' ?>
         <h1>Admin</h1>
         <a href="admin.php">Users</a>
         <a href="a-posts.php">Posts</a>
+        <a href="index.php"><===</a>
      </div>
 
      <div class="container grid grid-2">
